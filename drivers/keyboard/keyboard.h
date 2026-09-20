@@ -30,4 +30,9 @@ static const char
 
 char keyboard_getc(void);
 
+char *keyboard_getl(char *str, size_t n);
+
+typedef void (*keyboard_on_char)(char c);
+char *keyboard_getl_fnptr(char *str, size_t n, keyboard_on_char fn);
+
 #endif // _KEYBOARD_DRIVER_H

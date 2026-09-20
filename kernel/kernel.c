@@ -14,18 +14,25 @@
 extern void idt_init(void);
 extern void isr(void);
 
+void on_char(char c) {
+  if (c)
+    vga_terminal_putchar(c);
+}
+
 void kernel_main(void) {
   idt_init();
   vga_terminal_init();
-  __asm__ volatile("int $0x21");
-  vga_terminal_print("Hello, world\n");
-  while (1) {
-    vga_terminal_setcolor_at(vga_terminal_column, vga_terminal_row,
-                             vga_entry_color(VGA_COLOR_BLACK, VGA_COLOR_WHITE));
-    char key = keyboard_getc();
-    if (key == 0x00)
-      continue;
-    vga_terminal_putchar(key);
+  while (1) { /*
+     vga_terminal_setcolor_at(vga_terminal_column, vga_terminal_row,
+                              vga_entry_color(VGA_COLOR_BLACK,
+     VGA_COLOR_WHITE)); char key = keyboard_getc(); if (key == 0x00) continue;
+     vga_terminal_putchar(key);
+         */
+#define SIZE 100
+    char curr[SIZE];
+    for (size_t i = 0; i < SIZE; i++)
+      curr[i] = ' ';
+    char *r = keyboard_getl_fnptr(curr, SIZE, on_char);
   }
 }
 

@@ -15,3 +15,26 @@ char keyboard_getc(void) {
 
   return keyboard_scancode_to_ascii(scancode);
 }
+
+char *keyboard_getl_fnptr(char *str, size_t n, keyboard_on_char fn) {
+  char c = keyboard_getc();
+  if (fn)
+    fn(c);
+  size_t i = 0;
+  for (i; c != '\n' && i < n - 1; i++) {
+    if (c != 0) {
+      str[i] = c;
+    } else {
+      i--;
+    }
+    c = keyboard_getc();
+    if (fn)
+      fn(c);
+  }
+  str[i] = '\0';
+  return str;
+}
+
+char *keyboard_getl(char *str, size_t n) {
+  return keyboard_getl_fnptr(str, n, NULL);
+}
