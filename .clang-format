@@ -1,0 +1,6 @@
+Language: C
+BasedOnStyle: Google
+IdentWidth: 4
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: Empty
+AlignConsecutiveAssignments: true
