@@ -15,7 +15,11 @@ idtr:
 
 idt_init:
     movl $isr_wrapper, %eax
-    movl $0x10, %ecx
+    movl $0x20, %ecx
+    call idt_set_gate
+
+    movl $example, %eax
+    movl $0x21, %ecx
     call idt_set_gate
 
     lidt idtr

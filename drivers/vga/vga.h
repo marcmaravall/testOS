@@ -52,5 +52,6 @@ int vga_terminal_print(const char *str);
 int vga_terminal_write(const char *str, size_t len);
 
 void vga_terminal_putentryat(char c, uint8_t color, size_t x, size_t y);
+void vga_terminal_setcolor_at(size_t x, size_t y, uint8_t color);
 
 #endif // _VGA_DRIVER_H
